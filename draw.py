@@ -1,19 +1,31 @@
-from gof2 import *
+from GoL import *
 from graphics import *
 
-new = boardStart(64,64)
-new.evalBoard(new.alive())
-plott = new.bs
-win = GraphWin("grid", 64, 64, autoflush=False)
+new = GameOfLife(64,64)
+new.start()
+win = GraphWin("grid", 1024, 1024, autoflush=False)
 
-def drawer(plotter):
-  plott = plotter
+def clear(win):
+    for item in win.items[:]:
+        item.undraw()
+    win.update()
+
+def drawer():
   for x in range(0,64):
     for y in range(0,64):
-        if plotter[str(x)+','+str(y)] == 1:
-            win.plot(x,y, "blue")
+        if new.get(x,y) == 1:
+            aRectangle = Rectangle(Point(x*16, y*16), Point(x*16+16, y*16+16))
+            aRectangle.setFill("red")
+            aRectangle.setOutline("red")
+            aRectangle.draw(win)
         else:
-            win.plot(x,y, "white")
+            bRectangle = Rectangle(Point(x * 16, y * 16), Point(x * 16 + 16, y * 16 + 16))
+            bRectangle.setFill("white")
+            bRectangle.setOutline("white")
+            bRectangle.draw(win)
+
   update(30)
-  drawer(new.evalBoard(plotter))
-drawer(plott)
+  new.tick()
+  clear(win)
+  drawer()
+drawer()

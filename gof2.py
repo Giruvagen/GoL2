@@ -10,7 +10,7 @@ class boardStart:
     def __init__(self, xsize, ysize):
         self.xsize = xsize
         self.ysize = ysize
-        self.start = []
+        self.start =] [
         self.bs = collections.OrderedDict()
         self.b2 = collections.OrderedDict()
 
@@ -19,7 +19,7 @@ class boardStart:
             for b in range(0, self.ysize):
                 self.start.append(str(a) + "," + str(b))
         for i in self.start:
-            if random.random() > 0.8:
+            if random.random() > 0.9:
                 self.bs[i] = 1
             else:
                 self.bs[i] = 0
